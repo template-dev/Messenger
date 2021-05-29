@@ -1,0 +1,37 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>img/halftone-background-with-circles_23-2148907689.jpg</file>
+        <file>img/outer-space-background.jpg</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file>icons/exit.png</file>
+        <file>icons/settings.png</file>
+        <file>icons/paper-clip.png</file>
+        <file>icons/smiling.png</file>
+        <file>icons/voice-search.png</file>
+        <file>icons/loupe.png</file>
+        <file>icons/plus.png</file>
+        <file>icons/add-friend.png</file>
+        <file>icons/facetime-button.png</file>
+        <file>icons/more.png</file>
+        <file>icons/-.png</file>
+        <file>icons/setting.png</file>
+        <file>icons/model.png</file>
+        <file>icons/profile.png</file>
+        <file>icons/user.png</file>
+        <file>icons/previous.png</file>
+        <file>icons/send.png</file>
+        <file>icons/messenger.png</file>
+        <file>icons/user2.png</file>
+        <file>icons/padlock.png</file>
+        <file>icons/enter.png</file>
+        <file>icons/close.png</file>
+        <file>icons/sizeWindow.png</file>
+        <file>icons/expad-arrows.png</file>
+        <file>icons/email.png</file>
+        <file>icons/580b57fcd9996e24bc43c526.png</file>
+        <file>icons/email2.png</file>
+        <file>icons/add-user2.png</file>
+        <file>icons/add.png</file>
+    </qresource>
+</RCC>
