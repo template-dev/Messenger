@@ -4,23 +4,25 @@
 #include "serverStuff.h"
 
 #include <QObject>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 class BusinessLogic : public QObject
 {
   Q_OBJECT
 public:
-  explicit BusinessLogic(ServerStuff *server,QObject *parent = nullptr);
+  explicit BusinessLogic(ServerStuff *server, QObject *parent = nullptr);
 
 signals:
-  void onCreateUser(QString user);
+  /*void OnCreateUser(const QString& username, const QString& password);
   void OnNewMessage(QString msg);
-  //...
-  void OnLoginUser(QString user);
+  void OnLoginUser(const QString& username, const QString& password);*/
 
 private:
   ServerStuff *server;
+
 private slots:
-  void gotMessageHandler(QString msg);
+  void gotMessageHandler(QString msg, int code);
 
 };
 

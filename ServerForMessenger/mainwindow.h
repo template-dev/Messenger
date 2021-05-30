@@ -22,12 +22,9 @@ private slots:
   void on_start_clicked();
 
   void on_stop_clicked();
-  /*void on_pushButton_stopServer_clicked();
-  void on_pushButton_startServer_clicked();
-  void on_pushButton_testConn_clicked();*/
   void smbConnectedToServer();
   void smbDisconnectedFromServer();
-  void gotNewMesssage(QString msg);
+  void gotNewMessage(QString msg);
 
   void on_checkConnection_clicked();
 

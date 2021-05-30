@@ -37,14 +37,21 @@ void ServerStuff::readClient()
         }
 
         if (clientSocket->bytesAvailable() < m_nNextBlockSize) { break; }
-        QString str;
-        in >> str;
+        QString username;
+        QString command;
+        in >> username;
+        in >> command;
 
-        emit gotNewMesssage(str);
+        if(command == "new_user") { SetCode(0); }
+        else if(command == "login_user") { SetCode(1); }
+        else if(command == "get_user") { SetCode(2); }
+
+        emit gotNewMessage(username);
+        emit gotPackage(username, GetCode());
 
         m_nNextBlockSize = 0;
 
-        if (Send(clientSocket, QString("Reply: received [%1]").arg(str)) == -1)
+        if (Send(clientSocket, QString("Reply: received [%1]").arg(username)) == -1)
         {
             qDebug() << "Some error occured";
         }

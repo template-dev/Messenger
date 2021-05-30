@@ -16,8 +16,8 @@ MainWindow::MainWindow(QWidget *parent)
   ui->checkConnection->setEnabled(false);
 
   server = new ServerStuff(this);
-  connect(server, &ServerStuff::gotNewMesssage,
-          this, &MainWindow::gotNewMesssage);
+  connect(server, &ServerStuff::gotNewMessage,
+          this, &MainWindow::gotNewMessage);
   connect(server->tcpServer, &QTcpServer::newConnection,
           this, &MainWindow::smbConnectedToServer);
   connect(server, &ServerStuff::smbDisconnected,
@@ -81,7 +81,7 @@ void MainWindow::smbDisconnectedFromServer()
   ui->textEdit->append(tr("Somebody has disconnected"));
 }
 
-void MainWindow::gotNewMesssage(QString msg)
+void MainWindow::gotNewMessage(QString msg)
 {
   ui->textEdit->append(QString("New message: %1").arg(msg));
 }
@@ -93,7 +93,7 @@ void MainWindow::SendBroadcastShutdownToClients()
   for(int i = 0; i < clients.count(); i++)
   {
     //server->sendToClient(clients.at(i), "Connection closed");
-    server->Send(clients.at(i), "0");
+    server->Send(clients.at(i), "Connection closed!");
   }
 }
 
