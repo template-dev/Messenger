@@ -48,7 +48,7 @@ void ClientStuff::connected()
 
 bool ClientStuff::getStatus() {return status;}
 
-void ClientStuff::Send(QByteArray& package)
+void ClientStuff::Send(QByteArray package)
 {
   QByteArray arrBlock;
   QDataStream out(&arrBlock, QIODevice::WriteOnly);
@@ -60,7 +60,21 @@ void ClientStuff::Send(QByteArray& package)
 
 void ClientStuff::readyRead()
 {
-    QDataStream in(tcpSocket);
+  QDataStream in(tcpSocket);
+   if(tcpSocket->bytesAvailable() < sizeof(int))
+   {
+     return;
+   }
+   int blockSize ;
+   in >> blockSize;
+   if(tcpSocket->bytesAvailable() < blockSize)
+   {
+     return;
+   }
+   QByteArray arrayBlock;
+   in >> arrayBlock;
+   emit hasReadSome(arrayBlock);
+    /*QDataStream in(tcpSocket);
     for (;;)
     {
         if (!m_nNextBlockSize)
@@ -81,7 +95,7 @@ void ClientStuff::readyRead()
 
         emit hasReadSome(str);
         m_nNextBlockSize = 0;
-    }
+    }*/
 }
 
 /*void ClientStuff::gotDisconnection()

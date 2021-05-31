@@ -12,8 +12,6 @@ class BusinessLogic : public QObject
   Q_OBJECT
 public:
   explicit BusinessLogic(ServerStuff *server, QObject *parent = nullptr);
-
-public slots:
   void CreateUser(const QString& username, const QString& password);
   void NewMsg(QString msg);
   void LoginUser(const QString& username, const QString& password);
@@ -29,7 +27,7 @@ private:
   ServerStuff *server;
 
 private slots:
-  void gotMessageHandler(const QString& msg, const int &code);
+  void gotMessageHandler(QTcpSocket* socket, QByteArray);
 
 };
 

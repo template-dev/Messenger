@@ -31,65 +31,37 @@ void BusinessLogic::FindUser(const QString &username)
   //server->Send(socket, username);
 }
 
-void BusinessLogic::gotMessageHandler(const QString& username, const int& code)
+void BusinessLogic::gotMessageHandler(QTcpSocket* socket, QByteArray arrayBlock)
 {
-  QFile file_obj("Users/" + username + ".json");
-  if(!file_obj.open(QIODevice::ReadOnly)){
-      qDebug()<<"Failed to open "<< username << ".json";
-  }
+  qDebug() << arrayBlock;
 
-  QTextStream file_text(&file_obj);
-  QString json_string;
-  json_string = file_text.readAll();
-  file_obj.close();
-  QByteArray json_bytes = json_string.toLocal8Bit();
+  QByteArray arrayPackage = arrayBlock;//decrypt arrayBlock to QByteArray packageArray
 
-  auto json_doc = QJsonDocument::fromJson(json_bytes);
-
-  if(json_doc.isNull()){
-      qDebug()<<"Failed to create JSON doc.";
-  }
-  if(!json_doc.isObject()){
-      qDebug()<<"JSON is not an object.";
-  }
-
-  QJsonObject json_obj = json_doc.object();
-
-  if(json_obj.isEmpty()){
-      qDebug()<<"JSON object is empty.";
-  }
-
-  QVariantMap json_map = json_obj.toVariantMap();
-
-  qDebug() << json_map["login"].toString();
-  qDebug() << json_map["password"].toString();
-
-  QString login = json_map["login"].toString();
-  QString password = json_map["password"].toString();
+  QJsonDocument doc = QJsonDocument::fromJson(arrayPackage);
+  QJsonObject package = doc.object();
+  int code = package["cmd"].toInt();
   switch(code)
   {
   case 0:
   {
     QMessageBox msg;
+    QString login = package["login"].toString();
+    QString password = package["password"].toString();
     msg.setText("login: " + login + "\n password: " + password);
     msg.exec();
 
-    emit CreateUser(username, password);
+    CreateUser(login, password);
+    QJsonObject json;
+
+    json["code"] = 200;
+
+    QJsonDocument saveDoc(json);
+    QByteArray rawPacket = saveDoc.toJson();
+
+    QByteArray chiperPackage = rawPacket;//crypt rawPacket to QByteArray
+    server->Send(socket, chiperPackage);
   }
   break;
-  case 1:
-  {
-    emit LoginUser(username, password);
-  }
-  break;
-  case 2:
-  {
-    emit FindUser(username);
-  }
-  break;
-  default:
-    /* Failure code! */
-    break;
   }
 
   //1. Deserialize from JSON
@@ -114,5 +86,5 @@ void BusinessLogic::gotMessageHandler(const QString& username, const int& code)
   //Serialize into JSON
   //and send to client:
   //QString dto;
-   //server->Send(dto);
+  //server->Send(dto);
 }

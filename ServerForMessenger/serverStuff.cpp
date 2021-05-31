@@ -19,15 +19,28 @@ void ServerStuff::newConnection()
     connect(clientSocket, &QTcpSocket::disconnected, this, &ServerStuff::gotDisconnection);
 
     clients << clientSocket;
-
-    Send(clientSocket, "Reply: connection established");
+    // Сделать вызов сигнала и передать ему код нового соединения
+    //Send(clientSocket, "Reply: connection established");
 }
 
 void ServerStuff::readClient()
 {
     QTcpSocket *clientSocket = (QTcpSocket*)sender();
-
     QDataStream in(clientSocket);
+     if(clientSocket->bytesAvailable() < sizeof(int))
+     {
+       return;
+     }
+     int blockSize ;
+     in >> blockSize;
+     if(clientSocket->bytesAvailable() < blockSize)
+     {
+       return;
+     }
+     QByteArray arrayBlock;
+     in >> arrayBlock;
+     emit gotPackage(clientSocket, arrayBlock);
+    /*QDataStream in(clientSocket);
     for (;;)
     {
         if (!m_nNextBlockSize) {
@@ -39,13 +52,13 @@ void ServerStuff::readClient()
         QString username;
         QString command;
         in >> username;
-        in >> command;
+        in >> command;*/
 
         /*if(command == "new_user") { SetCode(0); }
         else if(command == "login_user") { SetCode(1); }
         else if(command == "get_user") { SetCode(2); }*/
 
-        emit gotNewMessage(username);
+        /*emit gotNewMessage(username);
         //emit gotPackage(username, GetCode());
 
         m_nNextBlockSize = 0;
@@ -54,7 +67,7 @@ void ServerStuff::readClient()
         {
             qDebug() << "Some error occured";
         }
-    }
+    //}*/
 }
 
 void ServerStuff::gotDisconnection()
@@ -63,16 +76,12 @@ void ServerStuff::gotDisconnection()
     emit smbDisconnected();
 }
 
-qint64 ServerStuff::Send(QTcpSocket* socket, const QString& str)
+void ServerStuff::Send(QTcpSocket* socket, QByteArray package)
 {
-    QByteArray arrBlock;
-    QDataStream out(&arrBlock, QIODevice::WriteOnly);
-    //out.setVersion(QDataStream::Qt_5_10);
-    //out << quint16(0) << QTime::currentTime() << str;
-    out << quint16(0) << str;
+  QByteArray arrBlock;
+  QDataStream out(&arrBlock, QIODevice::WriteOnly);
 
-    out.device()->seek(0);
-    out << quint16(arrBlock.size() - sizeof(quint16));
+  out << package.length() << package;
 
-    return socket->write(arrBlock);
+  socket->write(arrBlock);
 }
