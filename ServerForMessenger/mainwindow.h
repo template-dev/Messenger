@@ -25,6 +25,7 @@ private slots:
   void smbConnectedToServer();
   void smbDisconnectedFromServer();
   void gotNewMessage(QString msg);
+  void gotPackage(QString user, int command);
 
   void on_checkConnection_clicked();
 

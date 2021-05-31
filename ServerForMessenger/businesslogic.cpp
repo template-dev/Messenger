@@ -7,7 +7,27 @@ BusinessLogic::BusinessLogic(ServerStuff *server,QObject *parent) : QObject(pare
   connect(server,&ServerStuff::gotPackage,this,&BusinessLogic::gotMessageHandler);
 }
 
-void BusinessLogic::gotMessageHandler(QString username, int code)
+void BusinessLogic::CreateUser(const QString &username, const QString &password)
+{
+
+}
+
+void BusinessLogic::NewMsg(QString msg)
+{
+
+}
+
+void BusinessLogic::LoginUser(const QString &username, const QString &password)
+{
+  //server->Send(socket, username, password);
+}
+
+void BusinessLogic::FindUser(const QString &username)
+{
+  //server->Send(socket, username);
+}
+
+void BusinessLogic::gotMessageHandler(const QString& username, const int& code)
 {
   QFile file_obj("Users/" + username + ".json");
   if(!file_obj.open(QIODevice::ReadOnly)){
@@ -42,21 +62,27 @@ void BusinessLogic::gotMessageHandler(QString username, int code)
 
   QString login = json_map["login"].toString();
   QString password = json_map["password"].toString();
-
-  QMessageBox msg;
-
   switch(code)
   {
   case 0:
+  {
+    QMessageBox msg;
     msg.setText("login: " + login + "\n password: " + password);
     msg.exec();
-    break;
+
+    emit CreateUser(username, password);
+  }
+  break;
   case 1:
-    /* Read user datas from database */
-    break;
+  {
+    emit LoginUser(username, password);
+  }
+  break;
   case 2:
-    /* Get user datas from database */
-    break;
+  {
+    emit FindUser(username);
+  }
+  break;
   default:
     /* Failure code! */
     break;

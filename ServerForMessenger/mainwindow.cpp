@@ -86,6 +86,10 @@ void MainWindow::gotNewMessage(QString msg)
   ui->textEdit->append(QString("New message: %1").arg(msg));
 }
 
+void MainWindow::gotPackage(QString user, int command)
+{
+  ui->textEdit->append(QString("User: %1\nCommand: %2").arg(user, command));
+}
 
 void MainWindow::SendBroadcastShutdownToClients()
 {

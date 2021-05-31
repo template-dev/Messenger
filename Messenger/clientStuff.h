@@ -16,7 +16,7 @@ public:
     QTcpSocket *tcpSocket;
     bool getStatus();
     //void SendCodeAndLoginToServer(const QString& login, const QString& command);
-    void Send(QString  packet);
+    void Send(const QString& username, const QString& command);
 
 public slots:
     void closeConnection();

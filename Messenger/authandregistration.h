@@ -31,9 +31,6 @@ public:
   QPoint current;
   bool pressed;
 
-  void SaveLoginUserDatasInJSON();
-  void SaveRegUserDatasInJSON();
-
 public slots:
   void setStatus(bool newStatus);
   void receivedSomething(QString msg);

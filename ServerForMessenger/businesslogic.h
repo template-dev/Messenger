@@ -13,16 +13,23 @@ class BusinessLogic : public QObject
 public:
   explicit BusinessLogic(ServerStuff *server, QObject *parent = nullptr);
 
+public slots:
+  void CreateUser(const QString& username, const QString& password);
+  void NewMsg(QString msg);
+  void LoginUser(const QString& username, const QString& password);
+  void FindUser(const QString& username);
+
 signals:
-  /*void OnCreateUser(const QString& username, const QString& password);
+  void OnCreateUser(const QString& username, const QString& password);
   void OnNewMessage(QString msg);
-  void OnLoginUser(const QString& username, const QString& password);*/
+  void OnLoginUser(const QString& username, const QString& password);
+  void OnFindUser(const QString& username);
 
 private:
   ServerStuff *server;
 
 private slots:
-  void gotMessageHandler(QString msg, int code);
+  void gotMessageHandler(const QString& msg, const int &code);
 
 };
 

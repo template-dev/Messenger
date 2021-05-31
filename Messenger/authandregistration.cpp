@@ -31,35 +31,6 @@ authAndRegistration::~authAndRegistration()
 {
   delete ui;
 }
-
-void authAndRegistration::SaveLoginUserDatasInJSON()
-{
-  QFile saveFile("users/" + ui->lineEdit->text() + ".json");
-  if (!saveFile.open(QIODevice::WriteOnly))
-  {
-    qWarning("Couldn't open save file.");
-  }
-
-  /* --- --- */
-
-  login = ui->lineEdit_4->text();
-  password = ui->lineEdit_3->text();
-
-  //encryptedLogin = encrypt(ui->lineEdit->text(), "2");
-  //encryptedPassword = encrypt(ui->lineEdit_2->text(), "2");
-
-  //QString encryptStr =
-
-  /* --- --- */
-
-  json["login"] = login;
-  json["password"] = password;
-
-  QJsonDocument saveDoc(json);
-  saveFile.write(saveDoc.toJson());
-  saveFile.close();
-}
-
 void authAndRegistration::on_signUpBtn_clicked()
 {
   ui->stackedWidget->setCurrentIndex(1);
@@ -128,7 +99,6 @@ void authAndRegistration::on_loginBtn_clicked()
   //
   if(client->getStatus() == false)
   {
-    SaveLoginUserDatasInJSON();
     client->connect2host();
 
     /* --- */
@@ -283,6 +253,14 @@ void authAndRegistration::receivedSomething(QString msg)
 
 void authAndRegistration::on_loginBtn_2_clicked()
 {
+  QString username = ui->lineEdit_4->text();
+  QString password = ui->lineEdit_5->text();
+  client->connect2host();
+  bl->CreateNewUser(username, password);
+  this->close();
+  //disconnect(bl,&BusinessLogic::HasData,this,&authAndRegistration::HasDataHandler);
+  MainWindow* main = new MainWindow(bl);
+  main->show();
   /*QMessageBox msg;
   if(ui->lineEdit_3->text() == "" || ui->lineEdit_4->text() == "" || ui->lineEdit_5->text() == "" || ui->label_6->text() == "")
   {
@@ -296,7 +274,7 @@ void authAndRegistration::on_loginBtn_2_clicked()
   }
   else
   {*/
-    QList<QString> params;
+    /*QList<QString> params;
     params << ui->lineEdit_4->text() << ui->lineEdit_5->text() << ui->lineEdit_3->text();
     bl = new BusinessLogic(login);
     bl->SetPackageForRegistration(params);
@@ -308,7 +286,7 @@ void authAndRegistration::on_loginBtn_2_clicked()
     this->close();
     disconnect(bl,&BusinessLogic::HasData,this,&authAndRegistration::HasDataHandler);
     MainWindow* main = new MainWindow(bl);
-    main->show();
+    main->show();*/
 
     //delete bl;
     //}

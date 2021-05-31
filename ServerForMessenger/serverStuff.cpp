@@ -28,7 +28,6 @@ void ServerStuff::readClient()
     QTcpSocket *clientSocket = (QTcpSocket*)sender();
 
     QDataStream in(clientSocket);
-    //in.setVersion(QDataStream::Qt_5_10);
     for (;;)
     {
         if (!m_nNextBlockSize) {

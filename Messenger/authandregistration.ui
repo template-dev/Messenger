@@ -1161,13 +1161,53 @@ QLineEdit:focus {
                                 <property name="spacing">
                                  <number>0</number>
                                 </property>
+                                <item row="2" column="2">
+                                 <widget class="QLineEdit" name="lineEdit_6">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>300</width>
+                                    <height>0</height>
+                                   </size>
+                                  </property>
+                                  <property name="maximumSize">
+                                   <size>
+                                    <width>300</width>
+                                    <height>16777215</height>
+                                   </size>
+                                  </property>
+                                  <property name="font">
+                                   <font>
+                                    <family>Microsoft YaHei UI</family>
+                                    <pointsize>10</pointsize>
+                                   </font>
+                                  </property>
+                                  <property name="echoMode">
+                                   <enum>QLineEdit::Password</enum>
+                                  </property>
+                                  <property name="placeholderText">
+                                   <string>Confirm Password</string>
+                                  </property>
+                                 </widget>
+                                </item>
                                 <item row="1" column="0">
-                                 <widget class="QLabel" name="label_6">
+                                 <widget class="QLabel" name="label_4">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>50</width>
+                                    <height>0</height>
+                                   </size>
+                                  </property>
+                                  <property name="maximumSize">
+                                   <size>
+                                    <width>50</width>
+                                    <height>16777215</height>
+                                   </size>
+                                  </property>
                                   <property name="text">
                                    <string/>
                                   </property>
                                   <property name="pixmap">
-                                   <pixmap resource="images.qrc">:/icons/icons/email2.png</pixmap>
+                                   <pixmap resource="images.qrc">:/icons/icons/padlock.png</pixmap>
                                   </property>
                                   <property name="alignment">
                                    <set>Qt::AlignCenter</set>
@@ -1194,58 +1234,11 @@ QLineEdit:focus {
                                     <pointsize>10</pointsize>
                                    </font>
                                   </property>
-                                  <property name="placeholderText">
-                                   <string>E-Mail</string>
-                                  </property>
-                                 </widget>
-                                </item>
-                                <item row="0" column="2">
-                                 <widget class="QLineEdit" name="lineEdit_4">
-                                  <property name="minimumSize">
-                                   <size>
-                                    <width>300</width>
-                                    <height>0</height>
-                                   </size>
-                                  </property>
-                                  <property name="maximumSize">
-                                   <size>
-                                    <width>300</width>
-                                    <height>16777215</height>
-                                   </size>
-                                  </property>
-                                  <property name="font">
-                                   <font>
-                                    <family>Microsoft YaHei UI</family>
-                                    <pointsize>10</pointsize>
-                                   </font>
+                                  <property name="echoMode">
+                                   <enum>QLineEdit::Password</enum>
                                   </property>
                                   <property name="placeholderText">
-                                   <string>Login</string>
-                                  </property>
-                                 </widget>
-                                </item>
-                                <item row="2" column="0">
-                                 <widget class="QLabel" name="label_4">
-                                  <property name="minimumSize">
-                                   <size>
-                                    <width>50</width>
-                                    <height>0</height>
-                                   </size>
-                                  </property>
-                                  <property name="maximumSize">
-                                   <size>
-                                    <width>50</width>
-                                    <height>16777215</height>
-                                   </size>
-                                  </property>
-                                  <property name="text">
-                                   <string/>
-                                  </property>
-                                  <property name="pixmap">
-                                   <pixmap resource="images.qrc">:/icons/icons/padlock.png</pixmap>
-                                  </property>
-                                  <property name="alignment">
-                                   <set>Qt::AlignCenter</set>
+                                   <string>Password</string>
                                   </property>
                                  </widget>
                                 </item>
@@ -1277,8 +1270,8 @@ QLineEdit:focus {
                                   </property>
                                  </widget>
                                 </item>
-                                <item row="2" column="2">
-                                 <widget class="QLineEdit" name="lineEdit_3">
+                                <item row="0" column="2">
+                                 <widget class="QLineEdit" name="lineEdit_4">
                                   <property name="minimumSize">
                                    <size>
                                     <width>300</width>
@@ -1297,39 +1290,8 @@ QLineEdit:focus {
                                     <pointsize>10</pointsize>
                                    </font>
                                   </property>
-                                  <property name="echoMode">
-                                   <enum>QLineEdit::Password</enum>
-                                  </property>
                                   <property name="placeholderText">
-                                   <string>Password</string>
-                                  </property>
-                                 </widget>
-                                </item>
-                                <item row="3" column="2">
-                                 <widget class="QLineEdit" name="lineEdit_6">
-                                  <property name="minimumSize">
-                                   <size>
-                                    <width>300</width>
-                                    <height>0</height>
-                                   </size>
-                                  </property>
-                                  <property name="maximumSize">
-                                   <size>
-                                    <width>300</width>
-                                    <height>16777215</height>
-                                   </size>
-                                  </property>
-                                  <property name="font">
-                                   <font>
-                                    <family>Microsoft YaHei UI</family>
-                                    <pointsize>10</pointsize>
-                                   </font>
-                                  </property>
-                                  <property name="echoMode">
-                                   <enum>QLineEdit::Password</enum>
-                                  </property>
-                                  <property name="placeholderText">
-                                   <string>Confirm Password</string>
+                                   <string>Login</string>
                                   </property>
                                  </widget>
                                 </item>
@@ -1439,6 +1401,8 @@ QPushButton:hover {
                                  </widget>
                                 </item>
                                </layout>
+                               <zorder>frame_34</zorder>
+                               <zorder>loginBtn_2</zorder>
                               </widget>
                              </item>
                             </layout>

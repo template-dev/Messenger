@@ -23,7 +23,7 @@ MainWindow::MainWindow(BusinessLogic *bl,QWidget *parent)
   //this->setWindowFlags(Qt::CustomizeWindowHint);
   this->setWindowFlags(Qt::FramelessWindowHint);
   ui->message->setMaxLength(1300);
-  connect(bl,&BusinessLogic::HasData,this,&MainWindow::HasDataHandler);
+  //connect(bl, &BusinessLogic::HasData, this, &MainWindow::HasDataHandler);
 }
 
 MainWindow::~MainWindow()
@@ -266,9 +266,4 @@ void MainWindow::on_addBtn_clicked()
     lframe->setLayout(formLayout);
     ui->formLayout_2->addWidget(lframe);
   }
-}
-
-void MainWindow::HasDataHandler(QString msg)
-{
-
 }
