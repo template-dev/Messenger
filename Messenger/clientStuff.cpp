@@ -62,7 +62,6 @@ void ClientStuff::Send(const QString &username, const QString &command)
 void ClientStuff::readyRead()
 {
     QDataStream in(tcpSocket);
-    //in.setVersion(QDataStream::Qt_5_10);
     for (;;)
     {
         if (!m_nNextBlockSize)

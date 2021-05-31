@@ -28,6 +28,9 @@ public:
   void mousePressEvent(QMouseEvent *event);
   void mouseMoveEvent(QMouseEvent *event);
 
+  void SetCode(int Code) { this->Code = Code; }
+  int GetCode() { return this->Code; }
+
   QPoint current;
   bool pressed;
 
@@ -62,6 +65,7 @@ private:
   QString password;
   ClientStuff *client;
   BusinessLogic *bl;
+  int Code = 0;
 
 };
 

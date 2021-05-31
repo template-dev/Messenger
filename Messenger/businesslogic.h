@@ -22,7 +22,7 @@ public:
   void SendMessage(const QString& to, const QString& body);
 
 signals:
-  void HasData(QString message);
+
 
 private:
   QString login;

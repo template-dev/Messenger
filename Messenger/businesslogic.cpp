@@ -1,4 +1,7 @@
+#include "authandregistration.h"
 #include "businesslogic.h"
+
+#include <QMessageBox>
 
 BusinessLogic::BusinessLogic(ClientStuff *client, QObject *parent) : QObject(parent), client(client)
 {
@@ -46,6 +49,23 @@ void BusinessLogic::SendMessage(const QString &to, const QString &body)
 
 void BusinessLogic::IncomingPacket(QString msg)
 {
-  emit HasData(msg);
+  authAndRegistration auth;
+
+  if(msg == "200")
+  {
+    auth.SetCode(200);
+  }
+  if(msg == "404")
+  {
+    auth.SetCode(404);
+  }
+  if(msg == "403")
+  {
+    auth.SetCode(403);
+  }
+  if(msg == "500")
+  {
+    auth.SetCode(500);
+  }
 }
 

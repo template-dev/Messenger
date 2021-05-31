@@ -9,7 +9,8 @@ BusinessLogic::BusinessLogic(ServerStuff *server,QObject *parent) : QObject(pare
 
 void BusinessLogic::CreateUser(const QString &username, const QString &password)
 {
-
+  // Create user in database
+  //server->Send(socket, "200");
 }
 
 void BusinessLogic::NewMsg(QString msg)
@@ -19,6 +20,9 @@ void BusinessLogic::NewMsg(QString msg)
 
 void BusinessLogic::LoginUser(const QString &username, const QString &password)
 {
+  // Check user in database
+  // Take him datas
+  // Send datas to client
   //server->Send(socket, username, password);
 }
 

@@ -19,7 +19,7 @@ authAndRegistration::authAndRegistration(QWidget *parent) :
   client = new ClientStuff("localhost", 6547);
   bl = new BusinessLogic(client);
   //setStatus(client->getStatus());
-  connect(bl,&BusinessLogic::HasData,this,&authAndRegistration::HasDataHandler);
+  //connect(bl,&BusinessLogic::HasData,this,&authAndRegistration::HasDataHandler);
   //connect(client, &ClientStuff::hasReadSome, this, &authAndRegistration::receivedSomething);
   //connect(client, &ClientStuff::statusChanged, this, &authAndRegistration::setStatus);
   // FIXME change this connection to the new syntax
@@ -253,14 +253,36 @@ void authAndRegistration::receivedSomething(QString msg)
 
 void authAndRegistration::on_loginBtn_2_clicked()
 {
-  QString username = ui->lineEdit_4->text();
-  QString password = ui->lineEdit_5->text();
-  client->connect2host();
-  bl->CreateNewUser(username, password);
-  this->close();
-  //disconnect(bl,&BusinessLogic::HasData,this,&authAndRegistration::HasDataHandler);
-  MainWindow* main = new MainWindow(bl);
-  main->show();
+  QMessageBox msgBox;
+  if(GetCode() == 200)
+  {
+    QString username = ui->lineEdit_4->text();
+    QString password = ui->lineEdit_5->text();
+    client->connect2host();
+    bl->CreateNewUser(username, password);
+    this->close();
+    //disconnect(bl,&BusinessLogic::HasData,this,&authAndRegistration::HasDataHandler);
+    MainWindow* main = new MainWindow(bl);
+    main->show();
+
+    msgBox.setText("User created!");
+    msgBox.exec();
+  }
+  else if(GetCode() == 404)
+  {
+    msgBox.setText("Incorrect parameters!");
+    msgBox.exec();
+  }
+  else if(GetCode() == 403)
+  {
+    msgBox.setText("User is not logged in!");
+    msgBox.exec();
+  }
+  else if(GetCode() == 500)
+  {
+    msgBox.setText("User not created!");
+    msgBox.exec();
+  }
   /*QMessageBox msg;
   if(ui->lineEdit_3->text() == "" || ui->lineEdit_4->text() == "" || ui->lineEdit_5->text() == "" || ui->label_6->text() == "")
   {
