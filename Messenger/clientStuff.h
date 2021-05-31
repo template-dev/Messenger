@@ -16,7 +16,7 @@ public:
     QTcpSocket *tcpSocket;
     bool getStatus();
     //void SendCodeAndLoginToServer(const QString& login, const QString& command);
-    void Send(const QString& username, const QString& command);
+    void Send(QByteArray package);
 
 public slots:
     void closeConnection();
@@ -24,7 +24,7 @@ public slots:
 
 signals:
     void statusChanged(bool);
-    void hasReadSome(QString msg);
+    void hasReadSome(QByteArray msg);
 
 private slots:
     void readyRead();

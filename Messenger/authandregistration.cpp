@@ -254,8 +254,8 @@ void authAndRegistration::receivedSomething(QString msg)
 void authAndRegistration::on_loginBtn_2_clicked()
 {
   QMessageBox msgBox;
-  if(GetCode() == 200)
-  {
+  //if(GetCode() == 200)
+  //{
     QString username = ui->lineEdit_4->text();
     QString password = ui->lineEdit_5->text();
     client->connect2host();
@@ -267,10 +267,10 @@ void authAndRegistration::on_loginBtn_2_clicked()
 
     msgBox.setText("User created!");
     msgBox.exec();
-  }
+  /*}
   else if(GetCode() == 404)
-  {
-    msgBox.setText("Incorrect parameters!");
+  {*/
+    /*msgBox.setText("Incorrect parameters!");
     msgBox.exec();
   }
   else if(GetCode() == 403)
@@ -282,7 +282,7 @@ void authAndRegistration::on_loginBtn_2_clicked()
   {
     msgBox.setText("User not created!");
     msgBox.exec();
-  }
+  }*/
   /*QMessageBox msg;
   if(ui->lineEdit_3->text() == "" || ui->lineEdit_4->text() == "" || ui->lineEdit_5->text() == "" || ui->label_6->text() == "")
   {
