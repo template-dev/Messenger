@@ -10,13 +10,13 @@ BusinessLogic::BusinessLogic(ClientStuff *client, QObject *parent) : QObject(par
 
 void BusinessLogic::CreateNewUser(const QString &username, const QString &password)
 {
-  QDir().mkdir("Users");
+  /*QDir().mkdir("Users");
 
   QFile saveFile("Users/" + username + ".json");
   if (!saveFile.open(QIODevice::WriteOnly))
   {
     qWarning("Couldn't open save file.");
-  }
+  }*/
 
   QJsonObject json;
 
@@ -24,10 +24,10 @@ void BusinessLogic::CreateNewUser(const QString &username, const QString &passwo
   json["password"] = password;
 
   QJsonDocument saveDoc(json);
-  saveFile.write(saveDoc.toJson());
-  saveFile.close();
+  //saveFile.write(saveDoc.toJson());
+  //saveFile.close();
 
-  client->Send(username, "new_user");
+  client->Send(saveDoc.toJson());
   //1. Create parameters map json["mmmm"] for command new_user
   //2. Serialize to JSON into dto
   //QString dto; //...

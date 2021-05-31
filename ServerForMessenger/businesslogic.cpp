@@ -23,7 +23,7 @@ void BusinessLogic::LoginUser(const QString &username, const QString &password)
   // Check user in database
   // Take him datas
   // Send datas to client
-  //server->Send(socket, username, password);
+  //server->Send(socket, code);
 }
 
 void BusinessLogic::FindUser(const QString &username)

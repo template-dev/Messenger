@@ -41,12 +41,12 @@ void ServerStuff::readClient()
         in >> username;
         in >> command;
 
-        if(command == "new_user") { SetCode(0); }
+        /*if(command == "new_user") { SetCode(0); }
         else if(command == "login_user") { SetCode(1); }
-        else if(command == "get_user") { SetCode(2); }
+        else if(command == "get_user") { SetCode(2); }*/
 
         emit gotNewMessage(username);
-        emit gotPackage(username, GetCode());
+        //emit gotPackage(username, GetCode());
 
         m_nNextBlockSize = 0;
 

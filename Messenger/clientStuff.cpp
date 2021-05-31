@@ -48,13 +48,12 @@ void ClientStuff::connected()
 
 bool ClientStuff::getStatus() {return status;}
 
-void ClientStuff::Send(const QString &username, const QString &command)
+void ClientStuff::Send(QByteArray& package)
 {
   QByteArray arrBlock;
   QDataStream out(&arrBlock, QIODevice::WriteOnly);
-  //out.setVersion(QDataStream::Qt_5_10);
-  out << quint16(0) << username << command;
-  //out << quint16(1) << command;
+
+  out << package.length() << package;
 
   tcpSocket->write(arrBlock);
 }
