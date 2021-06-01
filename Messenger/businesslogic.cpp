@@ -10,14 +10,6 @@ BusinessLogic::BusinessLogic(ClientStuff *client, QObject *parent) : QObject(par
 
 void BusinessLogic::CreateNewUser(const QString &username, const QString &password)
 {
-  /*QDir().mkdir("Users");
-
-  QFile saveFile("Users/" + username + ".json");
-  if (!saveFile.open(QIODevice::WriteOnly))
-  {
-    qWarning("Couldn't open save file.");
-  }*/
-
   QJsonObject json;
 
   json["login"] = username;
@@ -80,5 +72,20 @@ void BusinessLogic::IncomingPacket(QByteArray msg)
   {
     auth.SetCode(500);
   }*/
+}
+
+void BusinessLogic::PollMessages()
+{
+   //Request new meaages for your user
+  QJsonObject json;
+
+
+
+  json["cmd"] = 12;
+  QJsonDocument saveDoc(json);
+
+  //client->Send(saveDoc.toJson());
+
+  qDebug() << "PollMessage";
 }
 

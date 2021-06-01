@@ -30,6 +30,7 @@ private:
 
 public slots:
   void IncomingPacket(QByteArray msg);
+  void PollMessages();
 };
 
 #endif // BUSINESSLOGIC_H

@@ -2,6 +2,7 @@
 #define BUSINESSLOGIC_H
 
 #include "serverStuff.h"
+#include "repository.h"
 
 #include <QObject>
 #include <QJsonDocument>
@@ -25,6 +26,7 @@ signals:
 
 private:
   ServerStuff *server;
+  Repository repos;
 
 private slots:
   void gotMessageHandler(QTcpSocket* socket, QByteArray);

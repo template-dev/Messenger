@@ -253,65 +253,14 @@ void authAndRegistration::receivedSomething(QString msg)
 
 void authAndRegistration::on_loginBtn_2_clicked()
 {
-  QMessageBox msgBox;
-  //if(GetCode() == 200)
-  //{
-    QString username = ui->lineEdit_4->text();
-    QString password = ui->lineEdit_5->text();
-    client->connect2host();
-    bl->CreateNewUser(username, password);
-    this->close();
-    //disconnect(bl,&BusinessLogic::HasData,this,&authAndRegistration::HasDataHandler);
-    MainWindow* main = new MainWindow(bl);
-    main->show();
-
-    msgBox.setText("User created!");
-    msgBox.exec();
-  /*}
-  else if(GetCode() == 404)
-  {*/
-    /*msgBox.setText("Incorrect parameters!");
-    msgBox.exec();
-  }
-  else if(GetCode() == 403)
-  {
-    msgBox.setText("User is not logged in!");
-    msgBox.exec();
-  }
-  else if(GetCode() == 500)
-  {
-    msgBox.setText("User not created!");
-    msgBox.exec();
-  }*/
-  /*QMessageBox msg;
-  if(ui->lineEdit_3->text() == "" || ui->lineEdit_4->text() == "" || ui->lineEdit_5->text() == "" || ui->label_6->text() == "")
-  {
-    msg.setText("Fill in all the fields!");
-    msg.exec();
-  }
-  else if(ui->lineEdit_3->text() != ui->lineEdit_6->text())
-  {
-    msg.setText("Password mismatch!");
-    msg.exec();
-  }
-  else
-  {*/
-    /*QList<QString> params;
-    params << ui->lineEdit_4->text() << ui->lineEdit_5->text() << ui->lineEdit_3->text();
-    bl = new BusinessLogic(login);
-    bl->SetPackageForRegistration(params);
-    bl->CreateDataEncryptJSONFile();
-
-    client->connect2host();
-    //client->SendCodeAndLoginToServer(login, "new_user");
-
-    this->close();
-    disconnect(bl,&BusinessLogic::HasData,this,&authAndRegistration::HasDataHandler);
-    MainWindow* main = new MainWindow(bl);
-    main->show();*/
-
-    //delete bl;
-    //}
+  QString username = ui->lineEdit_4->text();
+  QString password = ui->lineEdit_5->text();
+  client->connect2host();
+  bl->CreateNewUser(username, password);
+  this->close();
+  //disconnect(bl,&BusinessLogic::HasData,this,&authAndRegistration::HasDataHandler);
+  MainWindow* main = new MainWindow(bl);
+  main->show();
 }
 
 void authAndRegistration::HasDataHandler(QString message)

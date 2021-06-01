@@ -1,4 +1,4 @@
-QT += core gui network widgets
+QT += core gui network widgets sql
 
 TEMPLATE = app
 TARGET = server
@@ -15,11 +15,13 @@ SOURCES += \
     businesslogic.cpp \
     main.cpp \
     mainwindow.cpp \
+    repository.cpp \
     serverStuff.cpp
 
 HEADERS += \
     businesslogic.h \
     mainwindow.h \
+    repository.h \
     serverStuff.h
 
 FORMS += \

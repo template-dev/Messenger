@@ -27,19 +27,19 @@ void ServerStuff::readClient()
 {
     QTcpSocket *clientSocket = (QTcpSocket*)sender();
     QDataStream in(clientSocket);
-     if(clientSocket->bytesAvailable() < sizeof(int))
-     {
-       return;
-     }
-     int blockSize ;
-     in >> blockSize;
-     if(clientSocket->bytesAvailable() < blockSize)
-     {
-       return;
-     }
-     QByteArray arrayBlock;
-     in >> arrayBlock;
-     emit gotPackage(clientSocket, arrayBlock);
+    if(clientSocket->bytesAvailable() < sizeof(int))
+    {
+      return;
+    }
+    int blockSize ;
+    in >> blockSize;
+    if(clientSocket->bytesAvailable() < blockSize)
+    {
+      return;
+    }
+    QByteArray arrayBlock;
+    in >> arrayBlock;
+    emit gotPackage(clientSocket, arrayBlock);
     /*QDataStream in(clientSocket);
     for (;;)
     {

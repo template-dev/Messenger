@@ -9,6 +9,7 @@ BusinessLogic::BusinessLogic(ServerStuff *server,QObject *parent) : QObject(pare
 
 void BusinessLogic::CreateUser(const QString &username, const QString &password)
 {
+  repos.Create_User(username, password);
   // Create user in database
   //server->Send(socket, "200");
 }
@@ -40,17 +41,17 @@ void BusinessLogic::gotMessageHandler(QTcpSocket* socket, QByteArray arrayBlock)
   QJsonDocument doc = QJsonDocument::fromJson(arrayPackage);
   QJsonObject package = doc.object();
   int code = package["cmd"].toInt();
+  QString username = package["login"].toString();
+  QString password = package["password"].toString();
   switch(code)
   {
   case 0:
   {
     QMessageBox msg;
-    QString login = package["login"].toString();
-    QString password = package["password"].toString();
-    msg.setText("login: " + login + "\n password: " + password);
+    msg.setText("login: " + username + "\n password: " + password);
     msg.exec();
 
-    CreateUser(login, password);
+    CreateUser(username, password);
     QJsonObject json;
 
     json["code"] = 200;
@@ -62,6 +63,20 @@ void BusinessLogic::gotMessageHandler(QTcpSocket* socket, QByteArray arrayBlock)
     server->Send(socket, chiperPackage);
   }
   break;
+  case 1:
+  {
+    LoginUser(username, password);
+    QJsonObject json;
+
+    json["code"] = 200;
+
+    QJsonDocument saveDoc(json);
+    QByteArray rawPacket = saveDoc.toJson();
+
+    QByteArray chiperPackage = rawPacket;//crypt rawPacket to QByteArray
+    server->Send(socket, chiperPackage);
+  }
+    break;
   }
 
   //1. Deserialize from JSON
