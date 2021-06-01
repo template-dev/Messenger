@@ -16,8 +16,9 @@ MainWindow::MainWindow(QWidget *parent)
   ui->checkConnection->setEnabled(false);
 
   server = new ServerStuff(this);
-  connect(server, &ServerStuff::gotNewMessage,
-          this, &MainWindow::gotNewMessage);
+   bl = new BusinessLogic(server);
+  //connect(server, &ServerStuff::gotNewMessage,
+  //        this, &MainWindow::gotNewMessage);
   connect(server->tcpServer, &QTcpServer::newConnection,
           this, &MainWindow::smbConnectedToServer);
   connect(server, &ServerStuff::smbDisconnected,

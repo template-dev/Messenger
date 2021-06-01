@@ -23,13 +23,14 @@ public slots:
     virtual void newConnection();
     void readClient();
     void gotDisconnection();
-    qint64 Send(QTcpSocket *socket, const QString &str);
+    void Send(QTcpSocket *socket, QByteArray package);
 
 
 signals:
-    void gotPackage(QString username, int code);
+    void gotPackage(QTcpSocket*, QByteArray);
     void gotNewMessage(QString msg);
     void smbDisconnected();
+    void test();
 
 private:
     quint16 m_nNextBlockSize;

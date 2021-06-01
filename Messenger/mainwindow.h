@@ -56,5 +56,6 @@ private:
   bool leftMenuFlag;
   //ClientStuff *client;
   BusinessLogic *bl;
+  QTimer* timer;
 };
 #endif // MAINWINDOW_H

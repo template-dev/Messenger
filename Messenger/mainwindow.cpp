@@ -13,7 +13,7 @@ MainWindow::MainWindow(BusinessLogic *bl,QWidget *parent)
   , ui(new Ui::MainWindow)
 {
   ui->setupUi(this);
-  ui->moreBtn->setStyleSheet("#moreBtn{ padding: 20px 0; } #moreBtn:hover{ background-color: #363459; }");
+  //ui->moreBtn->setStyleSheet("#moreBtn{ padding: 20px 0; } #moreBtn:hover{ background-color: #363459; }");
 
   QPixmap pix(":/icons/icons/profile.png");
   int w = ui->iconLabel->width();
@@ -24,6 +24,9 @@ MainWindow::MainWindow(BusinessLogic *bl,QWidget *parent)
   this->setWindowFlags(Qt::FramelessWindowHint);
   ui->message->setMaxLength(1300);
   //connect(bl, &BusinessLogic::HasData, this, &MainWindow::HasDataHandler);
+  timer = new QTimer(this);
+  connect(timer, &QTimer::timeout,bl,&BusinessLogic::PollMessages);
+  timer->start(60000);
 }
 
 MainWindow::~MainWindow()
@@ -31,7 +34,7 @@ MainWindow::~MainWindow()
   delete ui;
 }
 
-void MainWindow::on_moreBtn_clicked()
+/*void MainWindow::on_moreBtn_clicked()
 {
   if(ui->rightMenuBlock->width() == 0) {
     ui->rightMenuBlock->setMinimumWidth(280);
@@ -48,7 +51,7 @@ void MainWindow::on_moreBtn_clicked()
     ui->backBtn->setVisible(false);
   }
 
-}
+}*/
 
 void MainWindow::on_settingsRightBlockBtn_clicked()
 {

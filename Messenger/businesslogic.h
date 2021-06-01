@@ -29,7 +29,8 @@ private:
   ClientStuff *client;
 
 public slots:
-  void IncomingPacket(QString msg);
+  void IncomingPacket(QByteArray msg);
+  void PollMessages();
 };
 
 #endif // BUSINESSLOGIC_H

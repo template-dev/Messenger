@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-
+#include "businesslogic.h"
 
 #include <QMainWindow>
 #include "serverStuff.h"
@@ -31,8 +31,10 @@ private slots:
 
 private:
   Ui::MainWindow *ui;
-  ServerStuff *server = nullptr;
+  //ServerStuff *server = nullptr;
   void SendBroadcastShutdownToClients();
+  BusinessLogic *bl;
+  ServerStuff* server;
 
 };
 #endif // MAINWINDOW_H
