@@ -27,7 +27,15 @@ void BusinessLogic::CreateNewUser(const QString &username, const QString &passwo
 
 void BusinessLogic::LoginUser(const QString &username, const QString &password)
 {
+  QJsonObject json;
 
+  json["login"] = username;
+  json["password"] = password;
+  json["cmd"] = 1;
+
+  QJsonDocument saveDoc(json);
+
+  client->Send(saveDoc.toJson());
 }
 
 void BusinessLogic::SendMessage(const QString &to, const QString &body)
@@ -45,11 +53,13 @@ void BusinessLogic::IncomingPacket(QByteArray msg)
   QJsonDocument doc = QJsonDocument::fromJson(arrayPackage);
   QJsonObject package = doc.object();
   int code = package["code"].toInt();
+  authAndRegistration auth;
   switch(code)
   {
   case 200:
   {
     qDebug() << "Code: " << code;
+    auth.SetFlag(true);
   }
   break;
   }

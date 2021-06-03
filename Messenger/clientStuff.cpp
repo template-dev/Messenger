@@ -61,41 +61,19 @@ void ClientStuff::Send(QByteArray package)
 void ClientStuff::readyRead()
 {
   QDataStream in(tcpSocket);
-   if(tcpSocket->bytesAvailable() < sizeof(int))
-   {
-     return;
-   }
-   int blockSize ;
-   in >> blockSize;
-   if(tcpSocket->bytesAvailable() < blockSize)
-   {
-     return;
-   }
-   QByteArray arrayBlock;
-   in >> arrayBlock;
-   emit hasReadSome(arrayBlock);
-    /*QDataStream in(tcpSocket);
-    for (;;)
-    {
-        if (!m_nNextBlockSize)
-        {
-            if (tcpSocket->bytesAvailable() < sizeof(quint16)) { break; }
-            in >> m_nNextBlockSize;
-        }
-
-        if (tcpSocket->bytesAvailable() < m_nNextBlockSize) { break; }
-
-        QString str; in >> str;
-
-        if (str == "0")
-        {
-            str = "Connection closed";
-            closeConnection();
-        }
-
-        emit hasReadSome(str);
-        m_nNextBlockSize = 0;
-    }*/
+  if(tcpSocket->bytesAvailable() < sizeof(int))
+  {
+    return;
+  }
+  int blockSize ;
+  in >> blockSize;
+  if(tcpSocket->bytesAvailable() < blockSize)
+  {
+    return;
+  }
+  QByteArray arrayBlock;
+  in >> arrayBlock;
+  emit hasReadSome(arrayBlock);
 }
 
 /*void ClientStuff::gotDisconnection()

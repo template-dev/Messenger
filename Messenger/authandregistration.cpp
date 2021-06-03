@@ -96,23 +96,13 @@ void authAndRegistration::on_signInBtn_clicked()
 
 void authAndRegistration::on_loginBtn_clicked()
 {
-  //
-  if(client->getStatus() == false)
+  QString username = ui->lineEdit->text();
+  QString password = ui->lineEdit_2->text();
+  client->connect2host();
+  bl->LoginUser(username, password);
+
+  if(GetFlag() == true)
   {
-    client->connect2host();
-
-    /* --- */
-    /*QByteArray arrBlock;
-    QDataStream out(&arrBlock, QIODevice::WriteOnly);
-    //out.setVersion(QDataStream::Qt_5_10);
-    out << quint16(0) << ui->lineEdit->text();
-
-    out.device()->seek(0);
-    out << quint16(arrBlock.size() - sizeof(quint16));
-
-    client->tcpSocket->write(arrBlock);*/
-    /* --- */
-
     this->close();
     MainWindow* main = new MainWindow(bl);
     main->show();
@@ -172,7 +162,7 @@ void authAndRegistration::mouseMoveEvent(QMouseEvent *event)
 {
     if(pressed)
     {
-        this->move(mapToParent(event->pos() - current));
+      this->move(mapToParent(event->pos() - current));
     }
 }
 

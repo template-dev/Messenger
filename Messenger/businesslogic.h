@@ -23,7 +23,6 @@ public:
 
 signals:
 
-
 private:
   QString login;
   ClientStuff *client;
