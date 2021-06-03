@@ -1,6 +1,7 @@
 #include "businesslogic.h"
 
 #include <QMessageBox>
+#include <QCryptographicHash>
 
 BusinessLogic::BusinessLogic(ServerStuff *server,QObject *parent) : QObject(parent), server(server)
 {
@@ -9,7 +10,9 @@ BusinessLogic::BusinessLogic(ServerStuff *server,QObject *parent) : QObject(pare
 
 void BusinessLogic::CreateUser(const QString &username, const QString &password)
 {
-  repos.Create_User(username, password);
+  QByteArray pwd = password.toUtf8();
+  QString hashPassword = QString(QCryptographicHash::hash((pwd),QCryptographicHash::Md5).toHex());
+  repos.Create_User(username, hashPassword);
 }
 
 void BusinessLogic::NewMsg(QString msg)
@@ -17,8 +20,9 @@ void BusinessLogic::NewMsg(QString msg)
 
 }
 
-void BusinessLogic::LoginUser(const QString &username, const QString &password)
+void BusinessLogic::LoginUser(const QString &username, const QString &password, int& code)
 {
+  repos.Login_User(username, password, code);
   // Check user in database
   // Take him datas
   // Send datas to client
@@ -33,6 +37,7 @@ void BusinessLogic::FindUser(const QString &username)
 void BusinessLogic::gotMessageHandler(QTcpSocket* socket, QByteArray arrayBlock)
 {
   qDebug() << arrayBlock;
+  int c = 0;
 
   QByteArray arrayPackage = arrayBlock;//decrypt arrayBlock to QByteArray packageArray
 
@@ -45,10 +50,6 @@ void BusinessLogic::gotMessageHandler(QTcpSocket* socket, QByteArray arrayBlock)
   {
   case 0:
   {
-    QMessageBox msg;
-    msg.setText("login: " + username + "\n password: " + password);
-    msg.exec();
-
     CreateUser(username, password);
     QJsonObject json;
 
@@ -63,7 +64,7 @@ void BusinessLogic::gotMessageHandler(QTcpSocket* socket, QByteArray arrayBlock)
   break;
   case 1:
   {
-    LoginUser(username, password);
+    LoginUser(username, password, c);
     QJsonObject json;
 
     json["code"] = 200;
@@ -74,7 +75,7 @@ void BusinessLogic::gotMessageHandler(QTcpSocket* socket, QByteArray arrayBlock)
     QByteArray chiperPackage = rawPacket;//crypt rawPacket to QByteArray
     server->Send(socket, chiperPackage);
   }
-    break;
+  break;
   }
 
   //1. Deserialize from JSON

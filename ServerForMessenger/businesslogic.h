@@ -15,7 +15,7 @@ public:
   explicit BusinessLogic(ServerStuff *server, QObject *parent = nullptr);
   void CreateUser(const QString& username, const QString& password);
   void NewMsg(QString msg);
-  void LoginUser(const QString& username, const QString& password);
+  void LoginUser(const QString& username, const QString& password, int& code);
   void FindUser(const QString& username);
 
 signals:

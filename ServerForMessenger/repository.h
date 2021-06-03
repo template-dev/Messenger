@@ -12,6 +12,7 @@ class Repository
 public:
   Repository();
   void Create_User(const QString& username, const QString& password);
+  void Login_User(const QString& username, const QString& password, int& code);
 
 private:
   QSqlDatabase db;
