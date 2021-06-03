@@ -10,8 +10,6 @@ BusinessLogic::BusinessLogic(ServerStuff *server,QObject *parent) : QObject(pare
 void BusinessLogic::CreateUser(const QString &username, const QString &password)
 {
   repos.Create_User(username, password);
-  // Create user in database
-  //server->Send(socket, "200");
 }
 
 void BusinessLogic::NewMsg(QString msg)
